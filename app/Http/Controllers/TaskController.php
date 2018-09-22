@@ -23,7 +23,9 @@ class TaskController extends Controller
             'user_id' => $user_id,
             'content' => $request['content'],
         ]);
-         return response()->json($task);
+        $task = Task::find($task->id);
+
+        return response()->json($task);
     }
     /**
      * Remove the specified resource from storage.
@@ -32,7 +34,6 @@ class TaskController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function delete($id) {
-        return response()->json(['code'=>601,'msg'=>'Hei!']);
 
         $task = Task::find($id);
         if($task->user_id==Auth::id()){
@@ -40,6 +41,7 @@ class TaskController extends Controller
             $task->save();
             return response()->json(['code'=>1,'msg'=>'Dropped!']);
         }else{
+            return response()->json(['code'=>601,'msg'=>'Hei!']);
 
         }
     }
@@ -62,12 +64,13 @@ class TaskController extends Controller
      */
     public function update(Request $request, $id) {
         $this->validate($request, [
-            'name' => 'required',
             'content' => 'required'
         ]);
         $task = Task::find($id);
-        $task->name = $request->get('name');
+        $task->deadline = $request->get('deadline');
         $task->content = $request->get('content');
+        $task->color = $request->get('color');
+        $task->sequence = $request->get('sequence');
         $task->save();
         return $task;
     }

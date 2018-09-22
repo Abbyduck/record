@@ -20,9 +20,29 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 //Route::post('/home','HomeController@index')->name('home');
 Route::post('/task', 'TaskController@create')->name('task');
+Route::post('/task/update/{id}', 'TaskController@update')->name('task.update');
 Route::get('/task/delete/{id}', 'TaskController@delete')->name('task.delete');
-Route::get('/task/s', function(){
-        dd(11) ;
+Route::post('/goal', 'GoalController@create')->name('goal');
+Route::post('/goal/update/{id}', 'GoalController@update')->name('goal.update');
+Route::get('/goal/delete/{id}', 'GoalController@delete')->name('goal.delete');
+Route::post('/schedule', 'ScheduleController@schedule')->name('schedule');
+Route::get('/getSchedule', 'ScheduleController@getSchedule')->name('getSchedule');
+
+Route::get('/test', function(){
+    $date_30 = date("Y-m-d", strtotime('-30day'));
+    $schedule_dates = Illuminate\Support\Facades\DB::select('SELECT date FROM schedule  WHERE date>:date', ['date' => $date_30]);
+    $schedule_dates = Illuminate\Support\Facades\DB::table('schedule')->where('date','>',$date_30)->pluck('date');
+    for($i=0;$i<=30;$i++) {
+        $days[] = date("Y-m-d", strtotime(' -'. $i . 'day'));
+    }
+
+//    $disable_dates=array_diff($days,$schedule_dates);
+    var_dump($days);
+    var_dump($schedule_dates);
+    var_dump(json_decode(json_encode($schedule_dates,true)));
+});
+Route::get('/test2', function(){
+        return view('test2');
 
 });
 Route::get('/test-sql', function() {

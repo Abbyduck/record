@@ -11,16 +11,25 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('js/jquery-3.3.1.min.js') }}" ></script>
 
+    <script src="{{ asset('storage/js/app.js') }}" defer></script>
+    <script src="{{ asset('storage/js/custom.js') }}" defer></script>
+    <script src="{{ asset('storage/js/jquery-3.3.1.js') }}" ></script>
+    <script src="{{ asset('storage/js/bootstrap.min.js') }}" ></script>
+    <script src="{{ asset('storage/js/bootstrap-datepicker.js')  }}" defer ></script>
+    <script src="{{ asset('storage/js/ckeditor.js') }}" ></script>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('storage/css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('storage/css/font-awesome.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('storage/css/bootstrap-datepicker.css') }}" rel="stylesheet">
+    <link href="{{ asset('storage/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('storage/css/custom.css') }}" rel="stylesheet">
+
+
 </head>
 <body>
     <div id="app">
@@ -33,10 +42,9 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse " id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -50,9 +58,9 @@
                                 <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                             </li>
                         @else
-                            <li class="nav-item dropdown">
+                            <li class="nav-item dropdown ">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    {{ Auth::user()->name }}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -71,11 +79,15 @@
                     </ul>
                 </div>
             </div>
+
         </nav>
 
         <main class="py-4">
             @yield('content')
+
         </main>
+
     </div>
+
 </body>
 </html>
