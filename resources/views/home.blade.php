@@ -15,18 +15,13 @@
                 <div class="card" >
                     <div class="card-header">To Do List <span class=" hidden-xs"><i class="icon-2x icon-trash pull-right trash"   style="right: 5%;  "></i></span></div>
                     @include('task.list')
-
                 </div>
-
-
             </div>
         </div>
         {{--Modal--}}
         <div class="modal fade" id="taskModal" tabindex="-1" role="dialog" >
-
             <div class="modal-dialog" role="document" id="task_add" style="width: 300px">
                 @include('task.detail')
-
             </div>
         </div>
         <div class="modal fade" id="goalModal" tabindex="-1" role="dialog" >
@@ -43,7 +38,6 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

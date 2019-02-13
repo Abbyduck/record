@@ -25,7 +25,6 @@
     </div>
     <script type="text/javascript">
         $(document).ready(function () {
-
             function taskUp(data){
                 return '<tr>'+
                         '<td  class="task" id="task_'+data.id +'" draggable="true" ondragstart="dragStart(event)"  data-toggle="modal" data-target="#taskModal" data-whatever=\''+JSON.stringify(data)+'\' style="color:'+data.color +';width:100%"><input type="checkbox" > '+data.content +'</td>'+
