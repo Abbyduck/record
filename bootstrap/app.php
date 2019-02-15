@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Create The Application
@@ -14,7 +13,14 @@
 $app = new Illuminate\Foundation\Application(
     realpath(__DIR__.'/../')
 );
-
+//.env配置多环境
+$env = $app->detectEnvironment(function () {
+    $environmentPath = __DIR__ . '/../';//项目根目录,.env所在目录
+    $setEnv = trim(file_get_contents($environmentPath.'.env'));//获取.env文件内容
+    if(file_exists($environmentPath)) {
+        putenv("APP_ENV=$setEnv");
+    }
+});
 /*
 |--------------------------------------------------------------------------
 | Bind Important Interfaces
