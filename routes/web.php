@@ -21,10 +21,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 //Route::post('/home','HomeController@index')->name('home');
 Route::post('/task', 'TaskController@create')->name('task');
 Route::post('/task/update/{id}', 'TaskController@update')->name('task.update');
-Route::get('/task/delete/{id}', 'TaskController@delete')->name('task.delete');
-Route::post('/goal', 'GoalController@create')->name('goal');
-Route::post('/goal/update/{id}', 'GoalController@update')->name('goal.update');
-Route::get('/goal/delete/{id}', 'GoalController@delete')->name('goal.delete');
+Route::post('/task/updateStatus/{id}/status/{status}', 'TaskController@updateStatus')->name('task.updateStatus');
 Route::post('/schedule', 'ScheduleController@schedule')->name('schedule');
 Route::get('/getSchedule', 'ScheduleController@getSchedule')->name('getSchedule');
 

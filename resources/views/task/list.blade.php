@@ -4,7 +4,8 @@
         @foreach($tasks as $task)
 
                 <tr >
-                    <td class="task " id="task_{{ $task->id }}" draggable="true" ondragstart="dragStart(event)"  data-toggle="modal" data-target="#taskModal" data-whatever='{{ $task }}' style="color:{{ $task->color }};width:100%"><input type="checkbox" > {{ $task->content }}</td>
+                    <td><input type="checkbox"{{$task->status}}> </td>
+                    <td class="task " id="task_{{ $task->id }}" draggable="true" ondragstart="dragStart(event)"  data-toggle="modal" data-target="#taskModal" data-whatever='{{ $task }}' style="color:{{ $task->color }};width:100%"> {{ $task->content }}</td>
                     <td class="visible-xs-block" ><i class="icon-2x icon-trash pull-right trash-xs " data-content="task_{{ $task->id }}" onclick="trash_xs(this )"></i></td>
                 </tr>
             @endforeach
@@ -27,6 +28,7 @@
         $(document).ready(function () {
             function taskUp(data){
                 return '<tr>'+
+                        '<td><input type="checkbox" '+data.status +'> </td>'+
                         '<td  class="task" id="task_'+data.id +'" draggable="true" ondragstart="dragStart(event)"  data-toggle="modal" data-target="#taskModal" data-whatever=\''+JSON.stringify(data)+'\' style="color:'+data.color +';width:100%"><input type="checkbox" > '+data.content +'</td>'+
                         ' <td class="visible-xs-block"><i class="icon-2x icon-trash pull-right trash-xs " data-content="task_'+data.id +'" onclick="trash_xs(this)" ></i></td>'+
                         '</tr>' ;
@@ -56,13 +58,14 @@
                    $('#add_task').click();
                }
             });
-            $('table').delegate('tr',"click",function () {
+            $('#task_table').delegate('tr',"click",function () {
                 var top=$(this).offset().top+$(this).height();
                 var left=$(this).offset().left;
                 $('#task_add').css({
                     'margin-top': top,
                     'margin-left':left
                 });
+
                 $('#taskModal').on('show.bs.modal', function (event) {
                     var button = $(event.relatedTarget) ;
                     var recipient = button.data('whatever');

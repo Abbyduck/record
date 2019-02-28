@@ -7,10 +7,6 @@
                 @include('schedule.schedule')
             </div>
             <div class="col-md-4">
-                <div class="card" style="margin-bottom: 30px">
-                    <div class="card-header">Today Top Goals <span class=" hidden-xs"><i class="icon-2x icon-trash pull-right trash"   style="right: 5%;  "></i></span></div>
-                    @include('goal.list')
-                </div>
 
                 <div class="card" >
                     <div class="card-header">To Do List <span class=" hidden-xs"><i class="icon-2x icon-trash pull-right trash"   style="right: 5%;  "></i></span></div>
@@ -24,12 +20,7 @@
                 @include('task.detail')
             </div>
         </div>
-        <div class="modal fade" id="goalModal" tabindex="-1" role="dialog" >
 
-            <div class="modal-dialog" role="document" id="goal_add" style="width: 300px">
-                @include('goal.detail')
-            </div>
-        </div>
 
     </div>
 
@@ -68,6 +59,28 @@
                     });
                 };
             }
+
+            //finish
+
+            $('input:checkbox').change(function(){
+                var type=$(this).parent().next().attr('id').split('_')[0];
+                var id=$(this).parent().next().attr('id').split('_')[1];
+                        console.log($(this).parent().next().attr('id'));
+                if(type=='task' &&id){
+                    var status=$(this).is(':checked')?2:1;
+                    $.ajax({
+                        type:'POST',
+                        url:"/"+type+"/updateStatus/"+id+"/status/"+status,
+                        success : function(data){
+                            showMsg({code: 1,msg: "Finished!"});
+                        },
+                        error: function () {
+                            showMsg({code: 601,msg: "Fail!"});
+                        }
+                    });
+                }
+
+            });
 
         });
 

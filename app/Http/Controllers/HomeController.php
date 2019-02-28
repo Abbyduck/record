@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Goal;
 use App\Schedule;
 use Illuminate\Http\Request;
 use App\Task ;
@@ -34,12 +33,14 @@ class HomeController extends Controller
         }
         $disable_dates=array_values(array_diff($days,json_decode(json_encode($schedule_dates,true))));
 
-        return view('home',[
-            'tasks' => Task::all()->where('user_id','=',Auth::id())->where('status','!=',3)->sortBy('sequence'),
-            'goals' => Goal::all()->where('user_id','=',Auth::id())->where('status','!=',3)->where('date','=',$today)->sortBy('sequence'),
-            'schedule'=>Schedule::all()->where('user_id','=',Auth::id())->where('date','=',$today)->first(),
-            'disable_dates'=>json_encode($disable_dates,true)
 
+        return view('home',[
+//            'tasks' => Task::where('user_id','=',Auth::id())->whereRaw('if(date = DATE_FORMAT(now(),"%Y-%m-%d") or updated_at > DATE_FORMAT(now(),"%Y-%m-%d"),status!=3,status=1 )')
+//                    ->orderBy('sequence')
+//                    ->select('id','content',DB::raw('(case when date < DATE_FORMAT(now(),"%Y-%m-%d") then concat("(",DATE_FORMAT(date,"%m-%d"),")") else "" end  ) as date '),DB::raw('(case when status = 2  then "checked" else "" end  ) as status '),DB::raw('(case when date < DATE_FORMAT(now(),"%Y-%m-%d") then "red" else "green" end  ) as color '),'sequence' )->get(),
+            'schedule'=>Schedule::all()->where('user_id','=',Auth::id())->where('date','=',$today)->first(),
+            'disable_dates'=>json_encode($disable_dates,true),
+            'tasks'=>array()
         ]);
     }
 

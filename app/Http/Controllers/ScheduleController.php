@@ -26,6 +26,7 @@ class ScheduleController extends Controller
      */
     public function schedule()
     {
+
         $user_id = Auth::id();
 
         $date = $_POST['date'];
@@ -37,7 +38,7 @@ class ScheduleController extends Controller
             $schedule = Schedule::create([
                 'user_id' => $user_id,
                 'content' => $_POST['data'],
-                'date' => date('y-m-d'),
+                'date' =>  $_POST['date'],
             ]);
         }
         return response()->json($schedule);

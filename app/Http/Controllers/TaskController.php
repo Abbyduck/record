@@ -31,13 +31,14 @@ class TaskController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
+     * @param  int  $status
      * @return \Illuminate\Http\Response
      */
-    public function delete($id) {
+    public function updateStatus($id,$status) {
 
         $task = Task::find($id);
         if($task->user_id==Auth::id()){
-            $task->status=3;
+            $task->status=$status;
             $task->save();
             return response()->json(['code'=>1,'msg'=>'Dropped!']);
         }else{

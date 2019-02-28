@@ -354,6 +354,7 @@ class ComposerStaticInitb1fd0e4143ec6a60ed926ad775793e4c
         'App\\Schedule' => __DIR__ . '/../..' . '/app/Schedule.php',
         'App\\Test' => __DIR__ . '/../..' . '/app/Test.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
+        'App\\tag' => __DIR__ . '/../..' . '/app/tag.php',
         'App\\task' => __DIR__ . '/../..' . '/app/Task.php',
         'Carbon\\Carbon' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Carbon.php',
         'Carbon\\CarbonInterval' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/CarbonInterval.php',
